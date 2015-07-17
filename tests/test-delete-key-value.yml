@@ -1,0 +1,27 @@
+---
+- name: Setup test file
+  template: src=files/test.json dest={{ file }}
+
+- name: delete the existing key
+  ansible-json:
+    file: "{{ file }}"
+    key: "{{ existingkey }}"
+    delete: True
+  register: delete_result
+
+- name: assert that deleting result contains a modification
+  assert:
+    that:
+      - "'{{ existingkey }}' not in delete_result.file"
+      - delete_result.changed == True
+
+- name: read the file
+  ansible-json:
+    file: "{{ file }}"
+  register: file_result
+
+- name: assert that deleting result contains a modification
+  assert:
+    that:
+      - "'{{ existingkey }}' not in file_result.file"
+      - file_result.changed == False

@@ -1,0 +1,51 @@
+---
+# If a key doesn't apply to your module (ex: choices, default, or
+# aliases) you can use the word 'null', or an empty list, [], where
+# appropriate.
+module: ansible-json
+short_description: CRUD operations on remote JSON files
+description:
+    - only file = file read
+    - only key = key read
+    - key + val = update or create
+    - key + delete = delete
+version_added: "0.1"
+author: Jeff Gensler
+notes:
+    - There is undefined behavior when options are passed the empty string
+    - Do not specify delete and value
+requirements:
+    - null
+options:
+    file:
+        description:
+            - file to operate on
+        required: true
+        default: null
+        choices: []
+        aliases: []
+        version_added: 0.1
+    key:
+        description:
+            - key or "keypath" of json object/key-value-pair to delete
+        required: false
+        default: null
+        choices: []
+        aliases: []
+        version_added: 0.1
+    value:
+        description:
+            - value to set key to
+        required: false
+        default: null
+        choices: []
+        aliases: []
+        version_added: 0.1
+    delete:
+        description:
+            - delete the specified key
+        required: false
+        default: null
+        choices: [True,False]
+        aliases: []
+        version_added: 0.1

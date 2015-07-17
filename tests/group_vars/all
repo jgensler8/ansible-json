@@ -1,0 +1,18 @@
+# -*- mode: yaml -*-
+---
+
+# destination file
+file: /tmp/test.json
+
+# simple crud variables
+existingkey: chocolate
+existingvalue: sweet
+newkey: lemon
+newvalue: sour
+
+# complex crud variables
+existingcomplexkey: host.css
+existingcomplexvalue: is cool
+query: "'require.js'.paths"
+newcomplexkey: new.css
+newcomplexvalue: is totally cool

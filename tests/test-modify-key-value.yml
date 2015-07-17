@@ -1,0 +1,27 @@
+---
+- name: Setup test file
+  template: src=files/test.json dest={{ file }}
+
+- name: modify an existing key/value pair
+  ansible-json:
+    file: "{{ file }}"
+    key: "{{ existingkey }}"
+    value: "{{ newvalue }}"
+  register: update_result
+
+- name: read the file to make sure file is consistent
+  ansible-json:
+    file: "{{ file }}"
+  register: file_result
+
+- debug: var=update_result
+- debug: var=file_result
+
+- name: assert that updating a key/value pair gets updated
+  assert:
+    that:
+      - update_result.changed == True
+      - update_result.file.{{ existingkey }} == '{{ newvalue }}'
+      - update_result.file.{{ existingkey }} != '{{ existingvalue }}'
+      - file_result.file.{{ existingkey }} == '{{ newvalue }}'
+      - file_result.file.{{ existingkey }} != '{{ existingvalue }}'

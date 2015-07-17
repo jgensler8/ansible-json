@@ -1,0 +1,26 @@
+---
+- name: Setup test file
+  template: src=files/test.json dest={{ file }}
+
+- name: read the file
+  ansible-json:
+    file: "{{ file }}"
+  register: pre_result
+
+- name: assert that the new key does not exist
+  assert:
+    that:
+      - "'{{ newkey }}' not in pre_result.file"
+
+- name: add the value
+  ansible-json:
+    file: "{{ file }}"
+    key: "{{ newkey }}"
+    value: "{{ newvalue }}"
+  register: result
+
+- name: assert that adding the key/value pair worked
+  assert:
+    that:
+      - "'{{ newkey }}' in result.file"
+      - result.changed == True

@@ -1,0 +1,27 @@
+---
+- name: Setup test file
+  template: src=files/complextest.json dest={{ file }}
+
+- name: read the file
+  ansible-json:
+    file: "{{ file }}"
+  register: pre_result
+
+- name: assert that the new complex key does not exist
+  assert:
+    that:
+      - "'{{ newcomplexkey }}' not in pre_result.file['require.js'].paths"
+
+- name: add the value
+  ansible-json:
+    file: "{{ file }}"
+    key: "{{ newcomplexkey }}"
+    value: "{{ newcomplexvalue }}"
+    query: "{{ query }}"
+  register: result
+
+- name: assert that adding the complex key/value pair worked
+  assert:
+    that:
+      - "'{{ newcomplexkey }}' in result.file['require.js'].paths"
+      - result.changed == True

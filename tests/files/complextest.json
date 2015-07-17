@@ -1,0 +1,7 @@
+{
+  "require.js": {
+    "paths": {
+      "{{ existingcomplexkey }}": "{{ existingcomplexvalue }}"
+    }
+  }
+}

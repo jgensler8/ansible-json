@@ -1,0 +1,14 @@
+---
+- name: Setup test file
+  template: src=files/test.json dest={{ file }}
+
+- name: read the file
+  ansible-json:
+    file: "{{ file }}"
+  register: result
+
+- name: assert that basic read returns unaltered file
+  assert:
+    that:
+      - result.file.{{ existingkey }} == '{{ existingvalue }}'
+      - result.changed == False

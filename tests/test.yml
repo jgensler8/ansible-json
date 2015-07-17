@@ -1,0 +1,12 @@
+---
+- hosts: testing-servers
+  vars_files: [group_vars/all]
+  remote_user: vagrant
+
+  tasks:
+  - include: test-basic-read.yml
+  - include: test-modify-key-value.yml
+  - include: test-add-key-value.yml
+  - include: test-delete-key-value.yml
+  - include: test-add-complex-key.yml
+  - include: test-delete-complex-key.yml
