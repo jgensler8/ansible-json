@@ -14,9 +14,6 @@
     file: "{{ file }}"
   register: file_result
 
-- debug: var=update_result
-- debug: var=file_result
-
 - name: assert that updating a key/value pair gets updated
   assert:
     that:

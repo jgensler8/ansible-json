@@ -14,5 +14,6 @@ newvalue: sour
 existingcomplexkey: host.css
 existingcomplexvalue: is cool
 query: "'require.js'.paths"
-newcomplexkey: new.css
+newcomplexkey: '"require.js".paths."new.css"'
+newcomplexkey_name: new.css
 newcomplexvalue: is totally cool

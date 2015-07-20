@@ -16,12 +16,11 @@
   ansible-json:
     file: "{{ file }}"
     key: "{{ existingcomplexkey }}"
-    query: "{{ query }}"
     delete: True
   register: result
 
 - name: assert that deleting the complex key/value pair worked
   assert:
     that:
-      - "'{{ existingcomplexkey }}' not in result.file['require.js'].paths"
+      - "'{{ existingcomplexkey_name }}' not in result.file['require.js'].paths"
       - result.changed == True

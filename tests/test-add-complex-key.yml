@@ -17,11 +17,10 @@
     file: "{{ file }}"
     key: "{{ newcomplexkey }}"
     value: "{{ newcomplexvalue }}"
-    query: "{{ query }}"
   register: result
 
 - name: assert that adding the complex key/value pair worked
   assert:
     that:
-      - "'{{ newcomplexkey }}' in result.file['require.js'].paths"
+      - "'{{ newcomplexkey_name }}' in result.file['require.js'].paths"
       - result.changed == True

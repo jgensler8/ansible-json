@@ -52,6 +52,7 @@ def propertyStringToValueEnumerator(dictionary, properties):
     currentProperty = properties[:1][0]
     if isAnyArrayOperation(currentProperty):
         key = extractKeyFromArrayString(currentProperty)
+        if d
         # if there are multiple derefernce things
         if isGenericArrayOperation(currentProperty):
             accumulate = []
@@ -72,11 +73,11 @@ def operation(function, dictionary, keyString, params=None):
     key = properties[-1:][0]
     properties = properties[:-1]
     for parent in propertyStringToValueEnumerator(dictionary, properties):
-        yield function(parent, key, params)
+        function(parent, key, params)
+        # yield function(parent, key, params) # I don't know why this won't work
 
 def set_helper(parent, key, value):
     parent[key] = value
-    return parent
 
 def set(dictionary, keyString, value):
     return operation(set_helper, dictionary, keyString, value)
