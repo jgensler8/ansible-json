@@ -52,7 +52,6 @@ def propertyStringToValueEnumerator(dictionary, properties):
     currentProperty = properties[:1][0]
     if isAnyArrayOperation(currentProperty):
         key = extractKeyFromArrayString(currentProperty)
-        if d
         # if there are multiple derefernce things
         if isGenericArrayOperation(currentProperty):
             accumulate = []
