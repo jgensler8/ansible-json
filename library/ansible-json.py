@@ -1,14 +1,59 @@
 #!/usr/bin/python
-# Copyright header....
 
 DOCUMENTATION = '''
 ---
 module: ansible-json
-short_description: json-like transforms
+short_description: CRUD operations on remote JSON files
+description:
+    - only file = file read
+    - only key = key read
+    - key + val = update or create
+    - key + delete = delete
+version_added: "0.1"
+author: Jeff Gensler
+notes:
+    - There is undefined behavior when options are passed the empty string
+    - Do not specify delete and value
+requirements:
+    - null
+options:
+    file:
+        description:
+            - file to operate on
+        required: true
+        default: null
+        choices: []
+        aliases: []
+        version_added: 0.1
+    key:
+        description:
+            - key or "keypath" of json object/key-value-pair to delete
+        required: false
+        default: null
+        choices: []
+        aliases: []
+        version_added: 0.1
+    value:
+        description:
+            - value to set key to
+        required: false
+        default: null
+        choices: []
+        aliases: []
+        version_added: 0.1
+    delete:
+        description:
+            - delete the specified key
+        required: false
+        default: null
+        choices: [True,False]
+        aliases: []
+        version_added: 0.1
 '''
 
 EXAMPLES = '''
-- action: ansible-json file=... key=... value=...
+- action: ansible-json file=/tmp/myjson.json key=some.key.string[].here value=there
+- action: ansible-json file=/tmp/myjson.json key=some.key.string[].here delete=true
 '''
 
 import re
@@ -65,8 +110,11 @@ def propertyStringToValueEnumerator(dictionary, properties):
     else:
         return propertyStringToValueEnumerator(dictionary[currentProperty], properties[1:])
 
-# create, update
-# function takes two arguements, the parent of the keyString and the key
+# A general operation function to operate on a given key string
+# "function" takes three arguements:
+# the parent of the keyString
+# the key
+# any extra params passed in to THIS function
 def operation(function, dictionary, keyString, params=None):
     properties = splitStringByProperties(keyString)
     key = properties[-1:][0]

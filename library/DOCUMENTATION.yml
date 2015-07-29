@@ -1,7 +1,4 @@
 ---
-# If a key doesn't apply to your module (ex: choices, default, or
-# aliases) you can use the word 'null', or an empty list, [], where
-# appropriate.
 module: ansible-json
 short_description: CRUD operations on remote JSON files
 description:
