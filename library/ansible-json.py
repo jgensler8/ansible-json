@@ -73,7 +73,7 @@ def splitStringByProperties(propertyString):
             propertyString = propertyString[match.end():]
             match = re.search(regex, propertyString)
         # Our regex leaves a little bit left
-        properties.append(propertyString)
+        properties.append(propertyString.strip('\'\"'))
     return properties
 
 def isAnyArrayOperation(prop):
