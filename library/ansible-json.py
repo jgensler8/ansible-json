@@ -1,5 +1,7 @@
 #!/usr/bin/python
 
+
+
 DOCUMENTATION = '''
 ---
 module: ansible-json
@@ -56,6 +58,7 @@ EXAMPLES = '''
 - action: ansible-json file=/tmp/myjson.json key=some.key.string[].here delete=true
 '''
 
+import os
 import re
 from ansible.module_utils.basic import *
 
@@ -145,10 +148,15 @@ def main():
         )
     )
 
-    filename = module.params['file']
+    filename =  os.path.expanduser(module.params['file'])
     json_key_string = module.params['key']
     json_value = module.params['value']
     should_delete = module.params['delete']
+
+    if not os.path.exists(filename):
+        module.fail_json(msg="Source %s doesn't lead to a file" % (filename))
+    if not os.access(filename, os.R_OK):
+        module.fail_json(msg="Source %s not readable" % (filename))
 
     # Store the files contents
     with open(filename, 'r') as data_file:
