@@ -19,7 +19,7 @@ newcomplexkey_name: new.css
 newcomplexvalue: is totally cool
 
 # array variables
-#arraykey: httpMappings[0].default
-arraykey: name
+arraykey: httpMappings[0].default
+#arraykey: name
 existingarrayvalue: true
 newarrayvalue: ""

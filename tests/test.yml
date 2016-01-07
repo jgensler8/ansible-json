@@ -10,5 +10,5 @@
   - include: test-add-key-value.yml
   - include: test-delete-key-value.yml
   - include: test-add-complex-key.yml
-  - include: test-delete-complex-key.yml
+  # - include: test-delete-complex-key.yml
   - include: test-modify-array-key-value.yml

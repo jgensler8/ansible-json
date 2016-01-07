@@ -74,7 +74,7 @@ There is no distinction between the two in this module.
 
 ### Delete
 
-Same support as Create, Update but add the delete option.
+Similar support as Create, Update but add the delete option.
 
 ```yaml
 - name: Create a key
