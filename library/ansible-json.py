@@ -163,7 +163,7 @@ def main():
         file_contents = json.load(data_file)
 
     # User gave us a Read command
-    if not json_value and not should_delete:
+    if json_value is None and not should_delete:
         query = None
         if json_key_string:
             query=get(file_contents, json_key_string)

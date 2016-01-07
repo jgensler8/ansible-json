@@ -2,7 +2,8 @@
 - hosts: testing-servers
   vars_files: [group_vars/all]
   remote_user: vagrant
-
+  vars:
+    ansible_ssh_pass: vagrant
   tasks:
   - include: test-basic-read.yml
   - include: test-modify-key-value.yml
@@ -10,3 +11,4 @@
   - include: test-delete-key-value.yml
   - include: test-add-complex-key.yml
   - include: test-delete-complex-key.yml
+  - include: test-modify-array-key-value.yml

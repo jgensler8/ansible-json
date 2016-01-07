@@ -1,0 +1,12 @@
+{
+    "name": "someconfig.json",
+    "httpMappings": [{
+        "default": true,
+        "hostname": "localhost",
+        "port": "56781",
+        "scheme": "http"
+    }],
+    "requirejs": {
+        "paths": {}
+    }
+}
